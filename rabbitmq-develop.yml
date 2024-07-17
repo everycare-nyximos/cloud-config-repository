@@ -1,0 +1,24 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${rabbitmq.user}
+    password: ${rabbitmq.password}
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        prefetch: 20
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+          max-interval: 10000
+          multiplier: 2
+queue:
+  point:
+    exchange: point_exchange
+    origin: point
+    dlq: point_dlq
+    max-retry: 5

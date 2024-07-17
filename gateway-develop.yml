@@ -1,0 +1,22 @@
+server:
+  port: 80
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user/**
+          filters:
+            - RewritePath=/user(?<segment>/?.*), $\{segment}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761//eureka
+    register-with-eureka: false

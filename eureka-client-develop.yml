@@ -1,0 +1,24 @@
+eureka:
+  datacenter: seoul
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+      sensitive: false
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "info"
+          - "bus-refresh"
+          - "health"
